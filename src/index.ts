@@ -5,6 +5,8 @@ moduleAlias.addAliases({
     '@config': `${sourcePath}/config`,
 })
 
+require('dotenv').config()
+
 import { createServer } from '@config/express';
 import { AddressInfo } from 'net';
 import http from 'http';
