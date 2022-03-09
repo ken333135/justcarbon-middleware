@@ -7,7 +7,7 @@ moduleAlias.addAliases({
 
 require('dotenv').config()
 
-import { createServer } from '@config/express';
+import { createServer } from './config/express';
 import { AddressInfo } from 'net';
 import http from 'http';
 
