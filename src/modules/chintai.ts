@@ -36,7 +36,14 @@ class Chintai {
                 "contractName":"qjzphofsqcry"
             }
         })
-        
+
+        /* Cintai only return this
+            data = {
+                status: 200,
+                data: 'Token successfully burned'
+            }
+        */
+
         return { 
             status: data.status,
             data: data.data 
