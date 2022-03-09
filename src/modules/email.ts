@@ -17,14 +17,13 @@ class Email {
             subject: 'Thank you for your purchase!',
             // text: 'and easy to do anywhere, even with Node.js',
             html: `
-                <h2>Thank you for your Purchase!</h2>
+                <h2>hank you for your contribution to slowing Climate Change!</h2>
 
-                <p>You have burnt ${numJCR} tokens</p>
-                <p>Our Customer Sucess Officer will be following up with your shortly</p>
+                <p>You have retired ${numJCR} tonnes of Carbon</p>
+                <p>The confirmation of retirement will be forwarded to your email address</p>
             `,
           }
           
-
         await sgMail
             .send(msg)
             .then((response) => {
