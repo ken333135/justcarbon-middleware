@@ -6,13 +6,8 @@ const Chintai = require('../modules/chintai').default
 const chintai = new Chintai()
 
 const Email = require('../modules/email').default
-const email = new Email()
+const SgEmail = new Email()
 
-
-router.get('/test', (req: express.Request, res: express.Response) => {
-    console.log(req)
-    res.json('HELLO WOLRD')
-})
 
 router.get('/balance', async ( req: express.Request, res: express.Response ) => {
     
@@ -60,7 +55,7 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
         const {
          numJCR,
          name,
-         email1,
+         email,
          address_1,
          address_2,
          postCode,
@@ -72,16 +67,16 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          tncCheck
         } = req.body;
 
-        await email.sendPurchaseSuccess({
+        await SgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
             numJCR,
-            email1
+            email
         })
 
-        await email.sendInfoToJustCarbon({
+        await SgEmail.sendInfoToJustCarbon({
             numJCR,
             name,
-            email1,
+            email,
             address_1,
             address_2,
             postCode,
