@@ -20,7 +20,7 @@ const startServer = async () => {
     const server = http.createServer(app).listen({ host, port }, () => {
 
         const addressInfo = server.address() as AddressInfo;
-        console.log(`Server ready at http://${addressInfo.address}:${addressInfo.port}`)
+        console.log(`Server ready at http://${addressInfo.address}:${addressInfo.port}`);
 
     })
 }
