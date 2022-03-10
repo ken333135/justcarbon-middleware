@@ -82,6 +82,7 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
 
         const {
          numJCR,
+         fee,
          name,
          email,
          address_1,
@@ -103,6 +104,7 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
 
         await mgEmail.sendInfoToJustCarbon({
             numJCR,
+            fee,
             name,
             email,
             address_1,
