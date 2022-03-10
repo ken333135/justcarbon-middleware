@@ -10,14 +10,14 @@ class Email {
     async sendPurchaseSuccess({txnId, numJCR, email}) {
 
         const msg = {
-            to: email, // Change to your recipient
             /* For Dev */
             // to: 'ken333136@gmail.com', // Change to your recipient
+            to: email, // Change to your recipient
             from: 'ken333136@hotmail.com', // Change to your verified sender
             subject: 'Thank you for your purchase!',
             // text: 'and easy to do anywhere, even with Node.js',
             html: `
-                <h2>hank you for your contribution to slowing Climate Change!</h2>
+                <h2>Thank you for your contribution to slowing Climate Change!</h2>
 
                 <p>You have retired ${numJCR} tonnes of Carbon</p>
                 <p>The confirmation of retirement will be forwarded to your email address</p>
