@@ -35,7 +35,7 @@ class Email {
     async sendInfoToJustCarbon({
         numJCR,
         name,
-        email1,
+        email,
         address_1,
         address_2,
         postCode,
@@ -54,7 +54,7 @@ class Email {
             html: `
                 <p>num JCR: ${numJCR}</p>
                 <p>name: ${name}</p>
-                <p>email1: ${email1}</p>
+                <p>email1: ${email}</p>
                 <p>address_1: ${address_1}</p>
                 <p>address_2: ${address_2}</p>
                 <p>postCode: ${postCode}</p>
