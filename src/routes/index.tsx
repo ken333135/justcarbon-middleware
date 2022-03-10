@@ -76,8 +76,6 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
 
 router.post('/success', async (req: express.Request, res: express.Response) => {
 
-    console.log({req})
-
     try {
 
         const {
@@ -124,6 +122,7 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
     catch(e) {
         console.log({e})
         console.log(JSON.stringify(e))
+        res.json({success: false})
     }
 
 })
