@@ -2,24 +2,6 @@ const mailgun = require("mailgun-js");
 const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
 
 const FROM_ADDRESS = `submissions@${process.env.MAILGUN_DOMAIN}`
-console.log({
-    apiKey: process.env.MAILGUN_API_KEY, 
-    domain: process.env.MAILGUN_DOMAIN,
-    FROM_ADDRESS
-})
-
-
-
-// const data = {
-// 	from: `submissions@${process.env.MAILGUN_DOMAIN}`,
-// 	to: 'ken333136@gmail.com',
-// 	subject: 'Hello',
-// 	text: 'Testing some Mailgun awesomness!'
-// };
-// mg.messages().send(data, function (error, body) {
-//     console.log({error,body})
-// 	console.log(body);
-// });
 
 // const JUST_CARBON_EMAIL = 'submissions@justcarbon.com'
 const JUST_CARBON_EMAIL = 'ken333136@gmail.com'
