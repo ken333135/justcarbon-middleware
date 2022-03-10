@@ -5,8 +5,10 @@ const router = e.Router();
 const Chintai = require('../modules/chintai').default
 const chintai = new Chintai()
 
+// const Email = require('../modules/email').default
+// const SgEmail = new Email()
 const Email = require('../modules/email').default
-const SgEmail = new Email()
+const mgEmail = new Email()
 
 
 router.get('/balance', async ( req: express.Request, res: express.Response ) => {
@@ -46,6 +48,32 @@ router.get('/burn/:amountToBurn', async (req: express.Request, res: express.Resp
    
 })
 
+router.post('/test', async (req: express.Request, res: express.Response) => {
+
+    try {
+
+        const {
+         numJCR,
+         email,
+        } = req.body;
+
+        await mgEmail.sendPurchaseSuccess({
+            txnId: 'txnId', 
+            numJCR,
+            email
+        })
+
+
+        res.json({success: true})
+
+    }
+    catch(e) {
+        console.log({e})
+        console.log(JSON.stringify(e))
+    }
+
+})
+
 router.post('/success', async (req: express.Request, res: express.Response) => {
 
     console.log({req})
@@ -67,13 +95,13 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          tncCheck
         } = req.body;
 
-        await SgEmail.sendPurchaseSuccess({
+        await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
             numJCR,
             email
         })
 
-        await SgEmail.sendInfoToJustCarbon({
+        await mgEmail.sendInfoToJustCarbon({
             numJCR,
             name,
             email,

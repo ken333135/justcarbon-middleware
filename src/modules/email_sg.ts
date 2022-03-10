@@ -1,49 +1,39 @@
-const mailgun = require("mailgun-js");
-const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
+// import axios from 'axios';
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-const FROM_ADDRESS = `submissions@${process.env.MAILGUN_DOMAIN}`
-console.log({
-    apiKey: process.env.MAILGUN_API_KEY, 
-    domain: process.env.MAILGUN_DOMAIN,
-    FROM_ADDRESS
-})
-
-
-
-// const data = {
-// 	from: `submissions@${process.env.MAILGUN_DOMAIN}`,
-// 	to: 'ken333136@gmail.com',
-// 	subject: 'Hello',
-// 	text: 'Testing some Mailgun awesomness!'
-// };
-// mg.messages().send(data, function (error, body) {
-//     console.log({error,body})
-// 	console.log(body);
-// });
-
-// const JUST_CARBON_EMAIL = 'submissions@justcarbon.com'
-const JUST_CARBON_EMAIL = 'ken333136@gmail.com'
+const JUST_CARBON_EMAIL = 'submissions@justcarbon.com'
+// const JUST_CARBON_EMAIL = 'ken333136@gmail.com'
 
 class Email {
 
     async sendPurchaseSuccess({txnId, numJCR, email}) {
 
-        const data = {
+        const msg = {
+            /* For Dev */
+            // to: 'ken333136@gmail.com', // Change to your recipient
             to: email, // Change to your recipient
-            from: FROM_ADDRESS, // Change to your verified sender
+            from: 'ken333136@hotmail.com', // Change to your verified sender
             subject: 'Thank you for your purchase!',
+            // text: 'and easy to do anywhere, even with Node.js',
             html: `
                 <h2>Thank you for your contribution to slowing Climate Change!</h2>
 
                 <p>You have retired ${numJCR} tonnes of Carbon</p>
                 <p>The confirmation of retirement will be forwarded to your email address</p>
             `,
-        };
-
-        await mg.messages().send(data, function (error, body) {
-            console.log({error,body})
-            console.log(body);
-        });
+          }
+          
+        await sgMail
+            .send(msg)
+            .then((response) => {
+                console.log(response[0].statusCode)
+                console.log(response[0].headers)
+            })
+            .catch((error) => {
+                console.error(error)
+                console.log(JSON.stringify(error))
+            })
 
         return
 
@@ -65,9 +55,9 @@ class Email {
         checkout,
     }) {
 
-        const data = {
+        const msg = {
             to: JUST_CARBON_EMAIL, // Change to your recipient
-            from: FROM_ADDRESS, // Change to your verified sender
+            from: 'ken333136@hotmail.com', // Change to your verified sender
             subject: 'New Burn and Retire',
             html: `
                 <p>num JCR: ${numJCR}</p>
@@ -84,11 +74,18 @@ class Email {
                 <p>checkout: ${checkout}</p>
             `,
           }
+          
 
-        await mg.messages().send(data, function (error, body) {
-            console.log({ error, body })
-            console.log(body);
-        });
+        await sgMail
+            .send(msg)
+            .then((response) => {
+                console.log(response[0].statusCode)
+                console.log(response[0].headers)
+            })
+            .catch((error) => {
+                console.error(error)
+                console.log(JSON.stringify(error))
+            })
 
         return
 
