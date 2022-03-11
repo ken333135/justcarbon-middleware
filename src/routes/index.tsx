@@ -10,6 +10,20 @@ const chintai = new Chintai()
 const Email = require('../modules/email').default
 const mgEmail = new Email()
 
+router.get('/ping', async ( req: express.Request, res: express.Response ) => {
+    
+    try {
+        console.log("PING SUCCESS")
+        res.json({ success: true })
+
+    }
+    catch(e){
+        console.log("PING FAIL")
+        res.status(500).json({ success: false })
+    }
+
+})
+
 
 router.get('/balance', async ( req: express.Request, res: express.Response ) => {
     
@@ -62,14 +76,14 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
             email,
         })
 
-        await mgEmail.sendPurchaseSuccess({
+        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
             numJCR,
             email
         })
 
 
-        res.json({success: true})
+        res.json({success: purchaseSuccessResponse})
 
     }
     catch(e) {
@@ -82,6 +96,8 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
 router.post('/success', async (req: express.Request, res: express.Response) => {
 
     try {
+
+        console.log("in shccess")
 
         const {
          numJCR,
@@ -99,13 +115,29 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          tncCheck
         } = req.body;
 
-        await mgEmail.sendPurchaseSuccess({
+        console.info({
+            numJCR,
+            fee,
+            name,
+            email,
+            address_1,
+            address_2,
+            postCode,
+            billingRadio,
+            giftName,
+            giftEmail,
+            checkout,
+            subscribeCheck,
+            tncCheck
+        })
+
+        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
             numJCR,
             email
         })
 
-        await mgEmail.sendInfoToJustCarbon({
+        let sendInfoResponse = await mgEmail.sendInfoToJustCarbon({
             numJCR,
             fee,
             name,
@@ -121,7 +153,11 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
             checkout,
         })
 
-        res.json({success: true})
+        res.json({
+            purchaseSuccessResponse,
+            sendInfoResponse,
+            success: true
+        })
 
     }
     catch(e) {
