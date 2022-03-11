@@ -21,6 +21,7 @@ class Email {
         console.log({ 
             FROM_ADDRESS,
             email,
+            API_KEY: process.env.MAILGUN_API_KEY,
         })
 
         const data = {
