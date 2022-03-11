@@ -18,6 +18,11 @@ class Email {
     /* txnId - potentially the transaction of the actual burn of JCR tokens (for future work) */
     async sendPurchaseSuccess({txnId, numJCR, email}) {
 
+        console.log({ 
+            FROM_ADDRESS,
+            email,
+        })
+
         const data = {
             to: email,
             from: FROM_ADDRESS,

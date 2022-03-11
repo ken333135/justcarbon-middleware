@@ -57,6 +57,11 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
          email,
         } = req.body;
 
+        console.log({
+            numJCR,
+            email,
+        })
+
         await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
             numJCR,
