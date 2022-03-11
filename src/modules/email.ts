@@ -1,8 +1,16 @@
-const mailgun = require("mailgun-js");
-const mg = mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+const mailgun = new Mailgun(formData);
+
+const mg = mailgun.client({
+    username: 'api', 
+    key: process.env.MAILGUN_API_KEY, 
+    url: 'https://api.eu.mailgun.net'
+});
 
 const FROM_ADDRESS = `offset@${process.env.MAILGUN_DOMAIN}`
-const JUST_CARBON_EMAIL = `offset@${process.env.MAILGUN_DOMAIN}`
+// const JUST_CARBON_EMAIL = `offset@${process.env.MAILGUN_DOMAIN}`
+const JUST_CARBON_EMAIL = `ken333136@gmail.com`
 
 /* Sanity check if environment variables are set */
 if (!process.env.MAILGUN_API_KEY) {
@@ -18,14 +26,14 @@ class Email {
     /* txnId - potentially the transaction of the actual burn of JCR tokens (for future work) */
     async sendPurchaseSuccess({txnId, numJCR, email}) {
 
-        console.log({ 
-            FROM_ADDRESS,
-            email,
-            API_KEY: process.env.MAILGUN_API_KEY,
-        })
+        // console.log({ 
+        //     FROM_ADDRESS,
+        //     email,
+        //     API_KEY: process.env.MAILGUN_API_KEY,
+        // })
 
         const data = {
-            to: email,
+            to: [email],
             from: FROM_ADDRESS,
             subject: 'Thank you for your purchase!',
             html: `
@@ -36,10 +44,15 @@ class Email {
             `,
         };
 
-        await mg.messages().send(data, function (error, body) {
-            console.log({error,body})
-            console.log(body);
-        });
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                return true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                return false
+            }); // logs any error
 
         return
 
@@ -63,7 +76,7 @@ class Email {
     }) {
 
         const data = {
-            to: JUST_CARBON_EMAIL,
+            to: [JUST_CARBON_EMAIL],
             from: FROM_ADDRESS,
             subject: 'New Burn and Retire',
             html: `
@@ -83,10 +96,15 @@ class Email {
             `,
           }
 
-        await mg.messages().send(data, function (error, body) {
-            console.log({ error, body })
-            console.log(body);
-        });
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                return true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                return false
+            }); // logs any error
 
         return
 
