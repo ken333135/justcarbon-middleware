@@ -115,21 +115,7 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          tncCheck
         } = req.body;
 
-        console.info({
-            numJCR,
-            fee,
-            name,
-            email,
-            address_1,
-            address_2,
-            postCode,
-            billingRadio,
-            giftName,
-            giftEmail,
-            checkout,
-            subscribeCheck,
-            tncCheck
-        })
+        console.info(`dataDump: numJCR; fee; name; email; address_1; address_2; postCode; billingRadio; giftName; giftEmail; checkout; subscribeCheck; tncCheck`)
 
         let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
