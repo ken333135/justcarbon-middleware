@@ -115,7 +115,9 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          tncCheck
         } = req.body;
 
-        console.info(`dataDump: numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingRadio:${billingRadio}; giftName:${giftName}; giftEmail:${giftEmail}; checkout:${checkout}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}`)
+        const uid = Date.now().toString()
+
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingRadio:${billingRadio}; giftName:${giftName}; giftEmail:${giftEmail}; checkout:${checkout}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}`)
 
         let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
@@ -138,6 +140,8 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
             tncCheck,
             checkout,
         })
+
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingRadio:${billingRadio}; giftName:${giftName}; giftEmail:${giftEmail}; checkout:${checkout}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}`)
 
         res.json({
             purchaseSuccessResponse,
