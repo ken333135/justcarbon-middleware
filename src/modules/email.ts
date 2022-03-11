@@ -44,17 +44,19 @@ class Email {
             `,
         };
 
+        let success
+
         await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
             .then(msg => {
                 console.log(msg)
-                return true
+                success =  true
             }) // logs response data
             .catch(err => {
                 console.log(err)
-                return false
+                success =  false
             }); // logs any error
 
-        return
+        return success
 
     }
 
@@ -96,17 +98,19 @@ class Email {
             `,
           }
 
+        let success;
+
         await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
             .then(msg => {
                 console.log(msg)
-                return true
+                success =  true
             }) // logs response data
             .catch(err => {
                 console.log(err)
-                return false
+                success =  false
             }); // logs any error
 
-        return
+        return success
 
     }
 
