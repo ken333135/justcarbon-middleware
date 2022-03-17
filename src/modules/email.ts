@@ -114,6 +114,41 @@ class Email {
 
     }
 
+    async sendContact({
+        name,
+        email,
+        details
+    }) {
+
+        const data = {
+            to: [JUST_CARBON_EMAIL],
+            from: FROM_ADDRESS,
+            subject: 'Contact Form Submission',
+            html: `
+                <h2>New Contact Form Submission</h2>
+                
+                <p>name: ${name}</p>
+                <p>email: ${email}</p>
+                <p>details: ${details}</p>
+            `,
+        };
+
+        let success
+
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                success =  true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                success =  false
+            }); // logs any error
+
+        return success
+
+    }
+
 
   }
 

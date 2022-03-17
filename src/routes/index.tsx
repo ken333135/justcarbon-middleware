@@ -158,4 +158,34 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
 
 })
 
+
+router.post('/contact', async (req: express.Request, res: express.Response) => {
+
+    try {
+
+        const { 
+            name,
+            email,
+            details
+        } = req.body
+
+        let contactResponse = await mgEmail.sendContact({
+            name,
+            email,
+            details
+        })
+
+        res.status(200).json({
+            success: true,
+            contactResponse
+        })
+
+    }
+    catch(e) {
+        console.log({e})
+        console.log(JSON.stringify(e))
+        res.json({success: false})
+    }
+})
+
 module.exports = router;
