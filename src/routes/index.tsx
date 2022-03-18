@@ -169,6 +169,8 @@ router.post('/contact', async (req: express.Request, res: express.Response) => {
             details
         } = req.body
 
+        console.info(`contactDump: name: ${name}; email: ${email}; details: ${details}`)
+
         let contactResponse = await mgEmail.sendContact({
             name,
             email,
@@ -199,6 +201,8 @@ router.post('/project-developer', async (req: express.Request, res: express.Resp
 			walletnumber,
 			tnc
         } = req.body
+
+        console.info(`developerDump: types: ${types}; name: ${name}; volume: ${volume}; walletnumber: ${walletnumber}; tnc: ${tnc}`)
 
         let contactResponse = await mgEmail.sendDeveloper({
 			types,
