@@ -9,8 +9,8 @@ const mg = mailgun.client({
 });
 
 const FROM_ADDRESS = `offset@${process.env.MAILGUN_DOMAIN}`
-const JUST_CARBON_EMAIL = `offset@${process.env.MAILGUN_DOMAIN}`
-// const JUST_CARBON_EMAIL = `ken333136@gmail.com`
+// const JUST_CARBON_EMAIL = `offset@${process.env.MAILGUN_DOMAIN}`
+const JUST_CARBON_EMAIL = process.env.NODE_ENV=='dev' ? `ken333136@gmail.com` : `offset@${process.env.MAILGUN_DOMAIN}`
 
 /* Sanity check if environment variables are set */
 if (!process.env.MAILGUN_API_KEY) {
