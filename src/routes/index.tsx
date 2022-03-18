@@ -188,4 +188,37 @@ router.post('/contact', async (req: express.Request, res: express.Response) => {
     }
 })
 
+router.post('/project-developer', async (req: express.Request, res: express.Response) => {
+
+    try {
+
+        const { 
+			types,
+            name,
+			volume,
+			walletnumber,
+			tnc
+        } = req.body
+
+        let contactResponse = await mgEmail.sendDeveloper({
+			types,
+            name,
+			volume,
+			walletnumber,
+			tnc
+        })
+
+        res.status(200).json({
+            success: true,
+            contactResponse
+        })
+
+    }
+    catch(e) {
+        console.log({e})
+        console.log(JSON.stringify(e))
+        res.json({success: false})
+    }
+})
+
 module.exports = router;

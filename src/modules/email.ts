@@ -149,6 +149,45 @@ class Email {
 
     }
 
+    async sendDeveloper({
+        types,
+        name,
+        volume,
+        walletnumber,
+        tnc
+    }) {
+
+        const data = {
+            to: [JUST_CARBON_EMAIL],
+            from: FROM_ADDRESS,
+            subject: 'Developer Form Submission',
+            html: `
+                <h2>New Developer Form Submission</h2>
+                
+                <p>types: ${types}</p>
+                <p>name: ${name}</p>
+                <p>volume: ${volume}</p>
+                <p>walletnumber: ${walletnumber}</p>
+                <p>tnc: ${tnc}</p>
+            `,
+        };
+
+        let success
+
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                success =  true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                success =  false
+            }); // logs any error
+
+        return success
+
+    }
+
 
   }
 
