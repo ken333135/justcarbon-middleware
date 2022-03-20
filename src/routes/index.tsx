@@ -11,7 +11,7 @@ const Email = require('../modules/email').default
 const mgEmail = new Email()
 
 router.get('/ping', async ( req: express.Request, res: express.Response ) => {
-    
+
     try {
         console.log("PING SUCCESS")
         res.json({ success: true })
@@ -97,8 +97,6 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
 
     try {
 
-        console.log("in shccess")
-
         const {
          numJCR,
          fee,
@@ -107,17 +105,14 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          address_1,
          address_2,
          postCode,
-         billingRadio,
-         giftName,
-         giftEmail,
-         checkout,
-         subscribeCheck,
-         tncCheck
+         billingaddress,
+         subscribe,
+         termsandconditions
         } = req.body;
 
         const uid = Date.now().toString()
 
-        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingRadio:${billingRadio}; giftName:${giftName}; giftEmail:${giftEmail}; checkout:${checkout}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}`)
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}`)
 
         let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
             txnId: 'txnId', 
@@ -133,15 +128,12 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
             address_1,
             address_2,
             postCode,
-            billingRadio,
-            giftName,
-            giftEmail,
-            subscribeCheck,
-            tncCheck,
-            checkout,
+            billingaddress,
+            subscribe,
+            termsandconditions,
         })
 
-        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingRadio:${billingRadio}; giftName:${giftName}; giftEmail:${giftEmail}; checkout:${checkout}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}`)
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}`)
 
         res.json({
             purchaseSuccessResponse,
