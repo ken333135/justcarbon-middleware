@@ -196,7 +196,7 @@ router.post('/project-developer', async (req: express.Request, res: express.Resp
             registerLink,
         } = req.body
 
-        console.info(`developerDump: types: ${types}; name: ${name}; volume: ${volume}; walletnumber: ${walletnumber}; tnc: ${tnc}`)
+        console.info(`developerDump: types: ${types}; name: ${name}; volume: ${volume}; walletnumber: ${walletnumber}; tnc: ${tnc}; registerNumber: ${registerNumber}; registerLink: ${registerLink}`)
 
         let contactResponse = await mgEmail.sendDeveloper({
 			types,
