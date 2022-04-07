@@ -154,7 +154,9 @@ class Email {
         name,
         volume,
         walletnumber,
-        tnc
+        tnc,
+        registerNumber,
+        registerLink,
     }) {
 
         const data = {
@@ -169,6 +171,8 @@ class Email {
                 <p>volume: ${volume}</p>
                 <p>walletnumber: ${walletnumber}</p>
                 <p>tnc: ${tnc}</p>
+                <p>registerNumber: ${registerNumber}</p>
+                <p>registerLink: ${registerLink}</p>
             `,
         };
 

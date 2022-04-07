@@ -191,7 +191,9 @@ router.post('/project-developer', async (req: express.Request, res: express.Resp
             name,
 			volume,
 			walletnumber,
-			tnc
+			tnc,
+            registerNumber,
+            registerLink,
         } = req.body
 
         console.info(`developerDump: types: ${types}; name: ${name}; volume: ${volume}; walletnumber: ${walletnumber}; tnc: ${tnc}`)
@@ -201,7 +203,9 @@ router.post('/project-developer', async (req: express.Request, res: express.Resp
             name,
 			volume,
 			walletnumber,
-			tnc
+			tnc,
+            registerNumber,
+            registerLink,
         })
 
         res.status(200).json({
