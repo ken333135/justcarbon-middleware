@@ -75,6 +75,12 @@ class Email {
         subscribeCheck,
         tncCheck,
         checkout,
+        GIFT_name,
+        GIFT_email,
+        GIFT_address_1,
+        GIFT_address_2,
+        GIFT_postCode,
+        giftAddress,
     }) {
 
         const data = {
@@ -95,6 +101,12 @@ class Email {
                 <p>subscribeCheck: ${subscribeCheck}</p>
                 <p>tncCheck: ${tncCheck}</p>
                 <p>checkout: ${checkout}</p>
+                <p>GIFT_name: ${GIFT_name}</p>
+                <p>GIFT_email: ${GIFT_email}</p>
+                <p>GIFT_address_1: ${GIFT_address_1}</p>
+                <p>GIFT_address_2: ${GIFT_address_2}</p>
+                <p>GIFT_postCode: ${GIFT_postCode}</p>
+                <p>giftAddress: ${giftAddress}</p>
             `,
           }
 

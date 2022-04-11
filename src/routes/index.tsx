@@ -107,7 +107,13 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          postCode,
          billingaddress,
          subscribe,
-         termsandconditions
+         termsandconditions,
+         GIFT_name,
+         GIFT_email,
+         GIFT_address_1,
+         GIFT_address_2,
+         GIFT_postCode,
+         giftAddress,
         } = req.body;
 
         const uid = Date.now().toString()
@@ -131,9 +137,19 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
             billingaddress,
             subscribe,
             termsandconditions,
+            GIFT_name,
+            GIFT_email,
+            GIFT_address_1,
+            GIFT_address_2,
+            GIFT_postCode,
+            giftAddress,
         })
 
-        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}`)
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
+        postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; 
+        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}; GIFT_name:${GIFT_name}, GIFT_email: ${GIFT_email};
+        GIFT_address_1: ${GIFT_address_1}; GIFT_address_2: ${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress: ${giftAddress}
+        `)
 
         res.json({
             purchaseSuccessResponse,
