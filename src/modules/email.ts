@@ -22,6 +22,35 @@ if (!process.env.MAILGUN_DOMAIN) {
 
 class Email {
 
+
+    async sendPurchaseSuccessTemplate({txnId, numJCR, email, name}) {
+        
+        const data = {
+            to: [email],
+            from: FROM_ADDRESS,
+            subject: 'Thank you for your purchase!',
+            template: 'confirmation',
+            'h:X-Mailgun-Variables': JSON.stringify({ // be sure to stringify your payload
+                recipient_name: name,
+            }),
+        };
+
+        let success
+
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                success =  true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                success =  false
+            }); // logs any error
+
+        return success
+
+    }
+
     /* Send a purhase success email to the user */
     /* txnId - potentially the transaction of the actual burn of JCR tokens (for future work) */
     async sendPurchaseSuccess({txnId, numJCR, email}) {

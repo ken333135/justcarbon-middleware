@@ -69,6 +69,7 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
         const {
          numJCR,
          email,
+         name,
         } = req.body;
 
         console.log({
@@ -76,10 +77,11 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
             email,
         })
 
-        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
+        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccessTemplate({
             txnId: 'txnId', 
             numJCR,
-            email
+            email,
+            name
         })
 
 
@@ -120,10 +122,11 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
 
         console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}`)
 
-        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccess({
+        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccessTemplate({
             txnId: 'txnId', 
             numJCR,
-            email
+            email,
+            name
         })
 
         let sendInfoResponse = await mgEmail.sendInfoToJustCarbon({
