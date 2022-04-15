@@ -100,27 +100,29 @@ router.post('/test-confirmation', async (req: express.Request, res: express.Resp
     try {
 
         const {
-         numJCR,
-         fee,
-         name,
-         email,
-         address_1,
-         address_2,
-         postCode,
-         billingaddress,
-         subscribe,
-         termsandconditions,
-         GIFT_name,
-         GIFT_email,
-         GIFT_address_1,
-         GIFT_address_2,
-         GIFT_postCode,
-         giftAddress,
+            numJCR,
+            fee,
+            name,
+            email,
+            address_1,
+            address_2,
+            postCode,
+            subscribeCheck,
+            tncCheck,
+            GIFT_name,
+            GIFT_email,
+            GIFT_address_1,
+            GIFT_address_2,
+            GIFT_postCode,
+            giftAddress,
+            billingRadio
         } = req.body;
 
         const uid = Date.now().toString()
 
-        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}`)
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
+        postCode:${postCode}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; billingRadio:${billingRadio}
+        GIFT_name: ${GIFT_name}; GIFT_email: ${GIFT_email}; GIFT_address_1:${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress:${giftAddress}`)
 
         let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccessTemplate({
             txnId: 'txnId', 
@@ -146,23 +148,22 @@ router.post('/test-confirmation', async (req: express.Request, res: express.Resp
             address_1,
             address_2,
             postCode,
-            billingaddress,
-            subscribe,
-            termsandconditions,
+            subscribeCheck,
+            tncCheck,
             GIFT_name,
             GIFT_email,
             GIFT_address_1,
             GIFT_address_2,
             GIFT_postCode,
             giftAddress,
+            billingRadio,
             test: true
         })
 
         console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
-        postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; 
-        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}; GIFT_name:${GIFT_name}, GIFT_email: ${GIFT_email};
-        GIFT_address_1: ${GIFT_address_1}; GIFT_address_2: ${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress: ${giftAddress}
-        `)
+        postCode:${postCode}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; billingRadio:${billingRadio}
+        GIFT_name: ${GIFT_name}; GIFT_email: ${GIFT_email}; GIFT_address_1:${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress:${giftAddress}
+        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse};`)
 
         res.json({
             purchaseSuccessResponse,
@@ -192,20 +193,22 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
          address_1,
          address_2,
          postCode,
-         billingaddress,
-         subscribe,
-         termsandconditions,
+         subscribeCheck,
+         tncCheck,
          GIFT_name,
          GIFT_email,
          GIFT_address_1,
          GIFT_address_2,
          GIFT_postCode,
          giftAddress,
+         billingRadio
         } = req.body;
 
         const uid = Date.now().toString()
 
-        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}`)
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
+        postCode:${postCode}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; billingRadio:${billingRadio}
+        GIFT_name: ${GIFT_name}; GIFT_email: ${GIFT_email}; GIFT_address_1:${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress:${giftAddress}`)
 
         let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccessTemplate({
             txnId: 'txnId', 
@@ -222,22 +225,21 @@ router.post('/success', async (req: express.Request, res: express.Response) => {
             address_1,
             address_2,
             postCode,
-            billingaddress,
-            subscribe,
-            termsandconditions,
+            subscribeCheck,
+            tncCheck,
             GIFT_name,
             GIFT_email,
             GIFT_address_1,
             GIFT_address_2,
             GIFT_postCode,
             giftAddress,
+            billingRadio
         })
 
         console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
-        postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; 
-        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}; GIFT_name:${GIFT_name}, GIFT_email: ${GIFT_email};
-        GIFT_address_1: ${GIFT_address_1}; GIFT_address_2: ${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress: ${giftAddress}
-        `)
+        postCode:${postCode}; subscribeCheck:${subscribeCheck}; tncCheck:${tncCheck}; billingRadio:${billingRadio}
+        GIFT_name: ${GIFT_name}; GIFT_email: ${GIFT_email}; GIFT_address_1:${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress:${giftAddress}
+        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse};`)
 
         res.json({
             purchaseSuccessResponse,

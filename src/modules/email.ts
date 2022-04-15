@@ -126,18 +126,15 @@ class Email {
         address_1,
         address_2,
         postCode,
-        billingRadio,
-        giftName,
-        giftEmail,
         subscribeCheck,
         tncCheck,
-        checkout,
         GIFT_name,
         GIFT_email,
         GIFT_address_1,
         GIFT_address_2,
         GIFT_postCode,
         giftAddress,
+        billingRadio,
         test
     }) {
 
@@ -153,12 +150,11 @@ class Email {
                 <p>address_1: ${address_1}</p>
                 <p>address_2: ${address_2}</p>
                 <p>postCode: ${postCode}</p>
-                <p>billingRadio: ${billingRadio}</p>
-                <p>giftName: ${giftName}</p>
-                <p>giftEmail: ${giftEmail}</p>
+
                 <p>subscribeCheck: ${subscribeCheck}</p>
                 <p>tncCheck: ${tncCheck}</p>
-                <p>checkout: ${checkout}</p>
+                <p>billingRadio: ${billingRadio}</p>
+
                 <p>GIFT_name: ${GIFT_name}</p>
                 <p>GIFT_email: ${GIFT_email}</p>
                 <p>GIFT_address_1: ${GIFT_address_1}</p>
