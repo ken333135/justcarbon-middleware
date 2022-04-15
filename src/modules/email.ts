@@ -23,13 +23,41 @@ if (!process.env.MAILGUN_DOMAIN) {
 class Email {
 
 
-    async sendPurchaseSuccessTemplate({txnId, numJCR, email, name}) {
+    async sendPurchaseSuccessTemplate({email, name, test}) {
         
         const data = {
             to: [email],
             from: FROM_ADDRESS,
             subject: 'Thank you for your purchase!',
             template: 'confirmation',
+            'h:X-Mailgun-Variables': JSON.stringify({ // be sure to stringify your payload
+                recipient_name: name,
+            }),
+        };
+
+        let success
+
+        await mg.messages.create(process.env.MAILGUN_DOMAIN, data)
+            .then(msg => {
+                console.log(msg)
+                success =  true
+            }) // logs response data
+            .catch(err => {
+                console.log(err)
+                success =  false
+            }); // logs any error
+
+        return success
+
+    }
+
+    async sendCertificateTemplate({email, name, test}) {
+        
+        const data = {
+            to: [email],
+            from: FROM_ADDRESS,
+            subject: 'Certificate and share',
+            template: 'certificate',
             'h:X-Mailgun-Variables': JSON.stringify({ // be sure to stringify your payload
                 recipient_name: name,
             }),
@@ -110,10 +138,11 @@ class Email {
         GIFT_address_2,
         GIFT_postCode,
         giftAddress,
+        test
     }) {
 
         const data = {
-            to: [JUST_CARBON_EMAIL],
+            to: [test ? email : JUST_CARBON_EMAIL],
             from: FROM_ADDRESS,
             subject: 'New Burn and Retire',
             html: `

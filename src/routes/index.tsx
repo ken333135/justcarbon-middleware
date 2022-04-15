@@ -95,6 +95,91 @@ router.post('/test', async (req: express.Request, res: express.Response) => {
 
 })
 
+router.post('/test-confirmation', async (req: express.Request, res: express.Response) => {
+
+    try {
+
+        const {
+         numJCR,
+         fee,
+         name,
+         email,
+         address_1,
+         address_2,
+         postCode,
+         billingaddress,
+         subscribe,
+         termsandconditions,
+         GIFT_name,
+         GIFT_email,
+         GIFT_address_1,
+         GIFT_address_2,
+         GIFT_postCode,
+         giftAddress,
+        } = req.body;
+
+        const uid = Date.now().toString()
+
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}`)
+
+        let purchaseSuccessResponse = await mgEmail.sendPurchaseSuccessTemplate({
+            txnId: 'txnId', 
+            numJCR,
+            email,
+            name,
+            test: true
+        })
+
+        let certificateResponse = await mgEmail.sendCertificateTemplate({
+            txnId: 'txnId', 
+            numJCR,
+            email,
+            name,
+            test: true
+        })
+
+        let sendInfoResponse = await mgEmail.sendInfoToJustCarbon({
+            numJCR,
+            fee,
+            name,
+            email,
+            address_1,
+            address_2,
+            postCode,
+            billingaddress,
+            subscribe,
+            termsandconditions,
+            GIFT_name,
+            GIFT_email,
+            GIFT_address_1,
+            GIFT_address_2,
+            GIFT_postCode,
+            giftAddress,
+            test: true
+        })
+
+        console.info(`dataDump: uid: ${uid} numJCR:${numJCR}; fee:${fee}; name:${name}; email:${email}; address_1:${address_1}; address_2:${address_2}; 
+        postCode:${postCode}; billingaddress:${billingaddress}; subscribe:${subscribe}; termsandconditions:${termsandconditions}; 
+        purchaseSuccessResponse: ${purchaseSuccessResponse}; sendInfoResponse:${sendInfoResponse}; GIFT_name:${GIFT_name}, GIFT_email: ${GIFT_email};
+        GIFT_address_1: ${GIFT_address_1}; GIFT_address_2: ${GIFT_address_2}; GIFT_postCode:${GIFT_postCode}; giftAddress: ${giftAddress}
+        `)
+
+        res.json({
+            purchaseSuccessResponse,
+            sendInfoResponse,
+            certificateResponse,
+            success: true
+        })
+
+    }
+    catch(e) {
+        console.log({e})
+        console.log(JSON.stringify(e))
+        res.json({success: false})
+    }
+
+})
+
 router.post('/success', async (req: express.Request, res: express.Response) => {
 
     try {
